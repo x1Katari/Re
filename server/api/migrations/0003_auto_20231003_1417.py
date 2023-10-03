@@ -2,6 +2,8 @@ from django.contrib.auth.models import User
 from django.db import migrations
 from random import randint
 
+from django.utils import timezone
+
 tags = [
     'Боевик',
     'Фантастика',
@@ -69,7 +71,13 @@ titles = [
 
 
 def dump_data(apps, schema_editor):
-    superuser = User.objects.create_superuser(username='admin', password='admin')
+    superuser = User.objects.create_superuser(
+        username='admin',
+        password='admin',
+        last_login=timezone.now(),
+        is_superuser=True,
+        is_staff=True
+    )
     superuser.save()
     global tags, titles
     Title = apps.get_model('api', 'Title')
