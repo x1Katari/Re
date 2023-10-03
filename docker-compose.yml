@@ -1,0 +1,38 @@
+version: '3.7'
+services:
+  db_re_api:
+    container_name: db_re_api
+    image: postgres:alpine
+    restart: always
+    ports:
+      - "5432:5432"
+    env_file:
+      - .env
+  
+  redis_re_api:
+    container_name: redis_re_api
+    image: redis:7.2.1-alpine
+    restart: always
+    ports:
+      - "6379:6379"
+    env_file:
+      - .env
+    depends_on:
+      - db_re_api
+
+  celery_worker_re_api:
+    container_name: celery_worker
+    build: .
+    command: /bin/bash -c "celery -A server worker -l info"
+    depends_on:
+      - db_re_api
+      - redis_re_api
+
+  web_service_re_api:
+    container_name: web_service_re_api
+    build: .
+    command: sh -c "python3 manage.py makemigrations && python3 manage.py migrate && python3 manage.py runserver"
+    ports:
+      - "8000:8000"
+    depends_on:
+      - celery_worker_re_api
