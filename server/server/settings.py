@@ -78,7 +78,7 @@ DATABASES = {
         'NAME': 'postgres',
         'USER': 'postgres',
         'PASSWORD': 'postgres',
-        'HOST': 'localhost',
+        'HOST': 'db_re_api',
         'PORT': '5432',
     }
 }
