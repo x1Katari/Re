@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db import migrations
 from random import randint
 
@@ -68,6 +69,8 @@ titles = [
 
 
 def dump_data(apps, schema_editor):
+    superuser = User.objects.create_superuser(username='admin', password='admin')
+    superuser.save()
     global tags, titles
     Title = apps.get_model('api', 'Title')
     Volume = apps.get_model('api', 'Volume')
