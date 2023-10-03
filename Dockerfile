@@ -11,3 +11,5 @@ RUN poetry config virtualenvs.create false
 RUN poetry install
 
 COPY . .
+
+WORKDIR /app/server
