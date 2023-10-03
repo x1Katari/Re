@@ -16,8 +16,6 @@ class Title(models.Model):
     en_name = models.CharField(max_length=128, blank=True)
     alt_name = models.CharField(max_length=128, blank=True)
     description = models.TextField(blank=True)
-    count_view = models.IntegerField(default=0, blank=True, null=False)
-    count_like = models.IntegerField(default=0, blank=True, null=False)
     tags = models.ManyToManyField(Tag, related_name='titles')
 
     class Meta:
@@ -46,6 +44,8 @@ class Chapter(models.Model):
                                related_name="chapters", null=False, default=1)
     number = models.FloatField(null=False)
     content = models.TextField(null=False)
+    count_view = models.IntegerField(default=0, blank=True, null=False)
+    count_like = models.IntegerField(default=0, blank=True, null=False)
 
     class Meta:
         ordering = ["number"]

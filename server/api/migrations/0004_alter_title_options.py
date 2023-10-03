@@ -4,9 +4,8 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('api', '0003_auto_20231003_1417'),
+        ('api', '0003_remove_title_count_like_remove_title_count_view_and_more'),
     ]
 
     operations = [
